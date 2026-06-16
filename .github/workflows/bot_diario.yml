@@ -1,0 +1,33 @@
+name: Ejecucion Diaria Bot Polla
+
+# 1. ¿Cuándo se ejecuta?
+on:
+  schedule:
+    # Ejecutar todos los días a las 12:30 UTC (7:30 AM hora Colombia)
+    - cron: '30 12 * * *'
+  workflow_dispatch: # Esto nos pone un botón para probarlo manualmente cuando queramos
+
+# 2. ¿Qué va a hacer?
+jobs:
+  correr-script:
+    runs-on: ubuntu-latest # Prende un servidor Linux virtual gratuito
+
+    steps:
+      - name: Traer el código del repositorio
+        uses: actions/checkout@v4
+
+      - name: Instalar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Instalar la librería de Gemini
+        run: pip install google-genai
+
+      - name: Ejecutar el bot de pronósticos
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GMAIL_PASS: ${{ secrets.GMAIL_PASS }}
+          MI_CORREO: ${{ secrets.MI_CORREO }}
+          DESTINATARIOS: ${{ secrets.DESTINATARIOS }}
+        run: python main.py
