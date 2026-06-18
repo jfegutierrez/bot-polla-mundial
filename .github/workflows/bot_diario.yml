@@ -2,8 +2,8 @@ name: Ejecucion Diaria Bot Polla
 
 on:
   schedule:
-    # 14:45 UTC equivale a las 9:45 AM (Hora Colombia)
-    - cron: '45 14 * * *'
+    # 12:15 UTC equivale a las 7:15 AM (Hora Colombia)
+    - cron: '15 12 * * *'
   workflow_dispatch:
 
 jobs:
