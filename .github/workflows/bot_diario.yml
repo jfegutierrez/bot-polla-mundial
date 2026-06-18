@@ -1,16 +1,18 @@
 name: Ejecucion Diaria Bot Polla
 
-# 1. ¿Cuándo se ejecuta?
 on:
   schedule:
-    # Ejecutar todos los días a las 12:30 UTC (7:30 AM hora Colombia)
-    - cron: '30 12 * * *'
-  workflow_dispatch: # Esto nos pone un botón para probarlo manualmente cuando queramos
+    # 14:45 UTC equivale a las 9:45 AM (Hora Colombia)
+    - cron: '45 14 * * *'
+  workflow_dispatch:
 
-# 2. ¿Qué va a hacer?
 jobs:
   correr-script:
-    runs-on: ubuntu-latest # Prende un servidor Linux virtual gratuito
+    runs-on: ubuntu-latest
+    
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
+      ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: 'true'
 
     steps:
       - name: Traer el código del repositorio
